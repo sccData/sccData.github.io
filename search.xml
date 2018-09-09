@@ -2,7 +2,18 @@
 <search>
   <entry>
     <title><![CDATA[Hello World]]></title>
-    <url>%2F2018%2F09%2F08%2Fhello-world%2F</url>
+    <url>%2F2018%2F09%2F09%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[机器学习基石 1.学习问题]]></title>
+    <url>%2F2018%2F09%2F09%2F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-1-%E5%AD%A6%E4%B9%A0%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[机器学习的概念 我们可以从人类的学习思维入手. 人类的学习过程, 是从观察出发, 经过大脑内化以后, 变成有用的技巧. 机器学习, 类似地, 是我们希望让计算机模拟人类的学习过程. 这时, 计算机观察到的东西被称作数据, 而思考过程实际上是计算过程, 技巧则是提高某一方面的表现. 因此, 为什么需要机器学习? 给定一张照片, 判断照片里的物体是不是一棵树. 使用传统的方法, 就需要对”什么是树”做出回答, 给出树的定义, 将其实现为程序. 按照规则进行判断, 并将其表述出来是很困难的. 然而, 一个小孩认识树的方法其实是通过观察, 经过经验的积累判断这个是树或者不是, 并不是教条的从长辈那里学习判断规则. 类似地, 我们可以让计算机自己从数据中学习树的判断方法. 因此, 机器学习是构建复杂系统的一种方法 机器学习的使用场景 当我们不能提前想好各种情况, 手工编码规则时. 例如让机器人在火星上导航, 我们不可能提前想到它在火星上会遇到什么样的情况 当我们无法轻易地定义问题的解决方案时. 例如要做语音识别/视觉识别, 我们无法对音频信号做出准确定义 当人们需要做出快速决策时. 例如高频交易 当要让机器服务于海量用户时. 例如做服务个性化定制 因此, 可以从以下三个关键点进行判断, 看是否适合使用机器学习 问题是”可以学习的”, 即存在一些潜在的模式, 以至于性能可以被提高 这些规则难以清晰定义 手里掌握对应的数据 机器学习的应用机器学习在衣食住行四个方面都得到了广泛地应用 衣: Abu-Mostafa 2012利用销售数据和对用户的调研结果构建推荐系统给用户推荐穿搭 食: Sadilek et al. 2013利用机器学习, 根据Twitter数据, 来判断餐厅的好坏 住: Tsanas and Xifara 2012利用已有房间的特点和耗能, 预测房屋的能用消耗 此外还有两个领域: 教育和娱乐 教育: 系统根据学生的答题情况, 有针对地提供题目让学生练习其薄弱的部分, 同时将太难的题推后给出. 即, 给定一名学生的答题历史和一个题目, 预测学生是否能做对这道题( KDDCup 2010 ) 娱乐: 系统根据用户的历史打分, 预测用户对新电影的打分( KDDCup 2011 ) 机器学习的过程问题背景以银行信用卡发卡这一问题为例. 假设银行收集了一些用户的基本信息, 例如下表 特征 值 年龄 23 性别 女 所在地居住年数 1 工龄 0.5 负债额 200,000 银行要解决的问题是, 对于这样的客户, 是否应该给她发放信用卡 问题形式化描述为了更加形式化地描述这个问题, 需要先定义一些符号: 输入: ${\bf x} \in \mathcal{X}$, 用户的特征 输出: ${\bf y} \in \mathcal{Y}$, 是否发放信用卡 目标函数: $f: \mathcal{X} \rightarrow \mathcal{Y}$, 是我们期望学到, 但是目前不知道的东西. 是最理想的公式 数据: $\mathcal{D} = {({\bf x}_1, y_1), ({\bf x}_2, y_2), \ldots, ({\bf x}_n, y_n)}$, 是之前积累的记录 假设: $g: \mathcal{X} \rightarrow \mathcal{Y}$, 是机器从数据中学到的函数. 我们通常都希望$g$的表现足够好, 即$g \approx f$. 注意这里$g$不一定等于$f$(实际上, 我们永远也无法知道真正的$f$是什么样子, 只知道由$f$产生的数据$\mathcal{D}$) 机器学习算法: $\mathcal {A}$, 是由$\mathcal {D}$产生$g$的算法, 可以理解为$\mathcal {A}$会从各种不同假设$h_k$(这里$h_k$有好有坏)构成的集合$\mathcal{H}$中挑选出来一个最好的$g$, 使得$g \approx f$. 即$\mathcal{A}$以$\mathcal{D}$和$\mathcal{H}$为输入, 以$g$为输出 我们所讲的机器学习模型, 指的就是$\mathcal{A}$和$\mathcal{H}$ 在有个这些记号以后, 我们可以重新给机器学习下一个定义 机器学习是使用数据计算假设$g$以逼近目标函数$f$的过程 机器学习与其它名词机器学习与数据挖掘数据挖掘的一个简单定义是使用海量数据, 在其中找出一些有趣的现象或性质. 这里, 如果”有用的性质”就是”能够逼近目标函数的假设”, 那么数据挖掘和机器学习是没有区别的. 如果”有用的性质”与”假设”是相关联的, 那么数据挖掘在很大程度上可以帮助机器学习 传统上的数据挖掘还关注如何在大的数据集中进行有效计算, 不过现在已经很难将机器学习和数据挖掘这两个概念分开了. 机器学习与人工智能人工智能要求计算机呈现出一些智能的行为. 由于机器学习逼近目标函数的过程就展示了一些智能, 因此我们可以说, 机器学习是实现人工智能的一种手段. 机器学习与统计学统计学是使用数据来对未知过程进行推论. 考虑到假设$g$是推论结果, $f$是不知道的事, 那么可以说统计是实现机器学习的一种方法. 但是传统的统计学从数学出发, 很多工具是为数学假设提供证明和推论. 而机器学习看重的是如何计算出结果. 总而言之, 统计学为机器学习提供了很多有力的工具 +参考 txshi-mt.com/2017/08/01/NTUML-1-the-Learning-Problem/]]></content>
+      <categories>
+        <category>课程笔记</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+      </tags>
   </entry>
 </search>
