@@ -114,7 +114,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="机器学习," />
 
 
 
@@ -127,14 +127,21 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="分类">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta name="description" content="感知机假设集合">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习基石 2.学习判断是与非">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/index.html">
 <meta property="og:site_name" content="scc技术博客">
+<meta property="og:description" content="感知机假设集合">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-09T06:04:23.035Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/2.png">
+<meta property="og:updated_time" content="2018-09-11T05:25:05.209Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分类">
+<meta name="twitter:title" content="机器学习基石 2.学习判断是与非">
+<meta name="twitter:description" content="感知机假设集合">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/1.png">
 
 
 
@@ -164,13 +171,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/"/>
 
 
 
 
 
-  <title>分类 | scc技术博客</title>
+  <title>机器学习基石 2.学习判断是与非 | scc技术博客</title>
   
 
 
@@ -321,40 +328,207 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="史崇辰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scc技术博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">分类</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                1 category in total
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/课程笔记/">课程笔记</a><span class="category-list-count">2</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">机器学习基石 2.学习判断是与非</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T23:34:08+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+          
+            <span class="post-meta-divider">|</span>
+            <span id="busuanzi_value_page_pv"></span>次阅读
+          
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h3 id="感知机假设集合"><a href="#感知机假设集合" class="headerlink" title="感知机假设集合"></a>感知机假设集合</h3><a id="more"></a>
+<p>第一章里讲到机器学习的核心就是, 使用算法$\mathcal{A}$接受数据$\mathcal{D}$, 从假设集合(所有可能性)$\mathcal{H}$中选出一个$g$, 希望$g \approx f$. 那么我们现在最关心的就是, $\mathcal{H}$应该是什么样的.</p>
+<p>以之前提到的银行审核发放信用卡的场景为例, 假设我们把每个使用者定义为向量$\bf x$, 包含$d$个维度, 例如$x_1$代表年龄, $x_2$代表年薪, 等等. 我们可以将这些维度综合起来给使用者一个整体的分数. 如果这个分数超过了某个标准, 那么就发放信用卡; 否则拒绝发放. 这样, 我们需要给每个$x_i, i \in \{ 1, \ldots, d \}$来赋一个系数$w_i$, 如果特征对最后的影响是正面的,  那么就给$w_i$正值, 否则给负值. 如果我们在规定一个阈值$\rm threshold$, 那么我们的决策方法就可以写成为, 如果</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^d w_ix_i > \rm threshold</script><p>, 就批准信用卡申请, 否则就拒绝.</p>
+<p>我们可以进一步地规定输出空间$\mathcal{Y} \in \{-1, +1\}$, 其中$y=-1$时表示拒绝, $y=1$时表示许可. 这样做的好处是我们可以直接使用$\rm sign$函数来求出$y$的值, 具体地说, 假设集合$\mathcal{H}$中的每个元素$h \in \mathcal{H}$都有如下形式</p>
+<script type="math/tex; mode=display">
+h(\bf x) ={\rm sign}((\sum_{i=1}^d w_ix_i) - {\rm threshold})</script><p>其中${\rm sign}$函数的定义为</p>
+<script type="math/tex; mode=display">
+{\rm sign}(x) = \begin{cases} +1 & {\rm if \ } x>0 \\ -1 & {\rm if \ } x<0 \end{cases}</script><p>即对用户的所有属性做一个加权打分, 看它是否超过阈值. 如果超过, 则批准; 否则就拒绝(如果正好等于阈值, 这种情况很少发生, 甚至可以随机决定$y$是$-1$还是$1$).</p>
+<p>这里我们说$\mathcal{H}$是一个集合的原因是, 不同的$\bf w$和$\rm threshold$都对应了不同的$h$, 所有这些可能性对应的所有$h$构成了最后的假设集合$\mathcal{H}$. $h$这样的函数类型称为<strong>感知机(perceptron)</strong>, 其中$\bf w$称为权重. 进一步地, 假设我们把$-\rm threshold$看做是$(-\rm threshold) \cdot (+1)$, 然后把$+1$看作是$x_0$, 那么前面的公式形式可以进一步的简化, 即</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+h({\bf x}) &= {\rm sign}((\sum_{i=1}^d w_ix_i) - {\rm threshold}) \\
+&= {\rm sign}((\sum_{i=1}^d w_ix_i)+\underbrace{(-{\rm threshold})}_{w_0}\cdot \underbrace{(+1)}_{x_0}) \\
+&= {\rm sign}(\sum_{i=0}^d w_ix_i) \\
+&= {\rm sign}({\bf w}^\mathsf{T}{\bf x}) 
+\end{align*}</script><p>这里$\bf w$和$\bf x$都看作是列向量, 即维度为$(d+1)1$</p>
+<p>我们可以通过一个图例来加强理解. 假如我们顾客的特征数(也就是前面说的属性维度)为$2$, 那么我们可以把任意输入$\bf x$画在一个平面$\mathbb{R}^2$上(类似的, 如果特征数为$d$, 那么每个输入$\bf x$都可以在$\mathbb{R}^d$空间表示, 只是会对我们的可视化造成困难), 每个输入对应平面上的一个点. 这样, $\mathbb{R}^2$上的$h$都有如下形式:</p>
+<script type="math/tex; mode=display">
+h(\bf x) = \rm sign(w_0+w_1x_1+w_2x_2)</script><p>可以看出, 每个$h$其实都对应了$\mathbb{R}^2$上的一条直线. 感知机规定位于直线某一侧的样本都被判定为正例, 另一侧的样本都被判定为负例. 不同的权重会产生不同的分类方式. 假设我们用蓝色的圈o表示正例, 红色的叉×表示负例, 下图给出了两个不同的感知机</p>
+<p><img src="/2018/09/10/机器学习基石-2-学习判断是与非/1.png" alt="1"></p>
+<p><img src="/2018/09/10/机器学习基石-2-学习判断是与非/2.png" alt="2"></p>
+<p>可以看出来右边的感知机在训练集上效果更好, 因为它对所有例子做出了正确分类. 而左侧的感知机在训练集上表现稍逊(一个正例被误判为负, 两个负例被误判为正)</p>
+<p>由于感知机都对应于一个超平面, 因此它也被称为是<strong>线性分类器</strong>($\mathbb R_2$的超平面是一条直线, $\mathbb R_3$的超平面是一个平面, 以此类推).</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <div>
+    	
+    		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+    	
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/09/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/16/Numpy基础-一/" rel="prev" title="Numpy基础(一)">
+                Numpy基础(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -387,8 +561,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -471,6 +654,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机假设集合"><span class="nav-text">感知机假设集合</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
