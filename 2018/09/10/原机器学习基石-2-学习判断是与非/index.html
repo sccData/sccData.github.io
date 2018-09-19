@@ -131,17 +131,19 @@
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习基石 2.学习判断是与非">
-<meta property="og:url" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/index.html">
 <meta property="og:site_name" content="scc技术博客">
 <meta property="og:description" content="感知机假设集合">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/1.png">
-<meta property="og:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/2.png">
-<meta property="og:updated_time" content="2018-09-11T05:25:05.209Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/4.png">
+<meta property="og:updated_time" content="2018-09-19T11:37:23.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石 2.学习判断是与非">
 <meta name="twitter:description" content="感知机假设集合">
-<meta name="twitter:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/1.png">
 
 
 
@@ -171,7 +173,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/"/>
 
 
 
@@ -340,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="史崇辰">
@@ -432,31 +434,69 @@
       
 
       
-        <h3 id="感知机假设集合"><a href="#感知机假设集合" class="headerlink" title="感知机假设集合"></a>感知机假设集合</h3><a id="more"></a>
-<p>第一章里讲到机器学习的核心就是, 使用算法$\mathcal{A}$接受数据$\mathcal{D}$, 从假设集合(所有可能性)$\mathcal{H}$中选出一个$g$, 希望$g \approx f$. 那么我们现在最关心的就是, $\mathcal{H}$应该是什么样的.</p>
-<p>以之前提到的银行审核发放信用卡的场景为例, 假设我们把每个使用者定义为向量$\bf x$, 包含$d$个维度, 例如$x_1$代表年龄, $x_2$代表年薪, 等等. 我们可以将这些维度综合起来给使用者一个整体的分数. 如果这个分数超过了某个标准, 那么就发放信用卡; 否则拒绝发放. 这样, 我们需要给每个$x_i, i \in \{ 1, \ldots, d \}$来赋一个系数$w_i$, 如果特征对最后的影响是正面的,  那么就给$w_i$正值, 否则给负值. 如果我们在规定一个阈值$\rm threshold$, 那么我们的决策方法就可以写成为, 如果</p>
-<script type="math/tex; mode=display">
-\sum_{i=1}^d w_ix_i > \rm threshold</script><p>, 就批准信用卡申请, 否则就拒绝.</p>
-<p>我们可以进一步地规定输出空间$\mathcal{Y} \in \{-1, +1\}$, 其中$y=-1$时表示拒绝, $y=1$时表示许可. 这样做的好处是我们可以直接使用$\rm sign$函数来求出$y$的值, 具体地说, 假设集合$\mathcal{H}$中的每个元素$h \in \mathcal{H}$都有如下形式</p>
-<script type="math/tex; mode=display">
-h(\bf x) ={\rm sign}((\sum_{i=1}^d w_ix_i) - {\rm threshold})</script><p>其中${\rm sign}$函数的定义为</p>
-<script type="math/tex; mode=display">
-{\rm sign}(x) = \begin{cases} +1 & {\rm if \ } x>0 \\ -1 & {\rm if \ } x<0 \end{cases}</script><p>即对用户的所有属性做一个加权打分, 看它是否超过阈值. 如果超过, 则批准; 否则就拒绝(如果正好等于阈值, 这种情况很少发生, 甚至可以随机决定$y$是$-1$还是$1$).</p>
-<p>这里我们说$\mathcal{H}$是一个集合的原因是, 不同的$\bf w$和$\rm threshold$都对应了不同的$h$, 所有这些可能性对应的所有$h$构成了最后的假设集合$\mathcal{H}$. $h$这样的函数类型称为<strong>感知机(perceptron)</strong>, 其中$\bf w$称为权重. 进一步地, 假设我们把$-\rm threshold$看做是$(-\rm threshold) \cdot (+1)$, 然后把$+1$看作是$x_0$, 那么前面的公式形式可以进一步的简化, 即</p>
-<script type="math/tex; mode=display">
+        <h3 id="感知机假设集合">感知机假设集合</h3>
+<a id="more"></a>
+<p>第一章里讲到机器学习的核心就是, 使用算法<span class="math inline">\(\mathcal{A}\)</span>接受数据<span class="math inline">\(\mathcal{D}\)</span>, 从假设集合(所有可能性)<span class="math inline">\(\mathcal{H}\)</span>中选出一个<span class="math inline">\(g\)</span>, 希望<span class="math inline">\(g \approx f\)</span>. 那么我们现在最关心的就是, <span class="math inline">\(\mathcal{H}\)</span>应该是什么样的.</p>
+<p>以之前提到的银行审核发放信用卡的场景为例, 假设我们把每个使用者定义为向量<span class="math inline">\(\bf x\)</span>, 包含<span class="math inline">\(d\)</span>个维度, 例如<span class="math inline">\(x_1\)</span>代表年龄, <span class="math inline">\(x_2\)</span>代表年薪, 等等. 我们可以将这些维度综合起来给使用者一个整体的分数. 如果这个分数超过了某个标准, 那么就发放信用卡; 否则拒绝发放. 这样, 我们需要给每个<span class="math inline">\(x_i, i \in \{ 1, \ldots, d \}\)</span>来赋一个系数<span class="math inline">\(w_i\)</span>, 如果特征对最后的影响是正面的, 那么就给<span class="math inline">\(w_i\)</span>正值, 否则给负值. 如果我们在规定一个阈值<span class="math inline">\(\rm threshold\)</span>, 那么我们的决策方法就可以写成为, 如果<span class="math inline">\(\sum_{i=1}^d w_ix_i &gt; \rm threshold\)</span>, 就批准信用卡申请, 否则就拒绝.</p>
+<p>我们可以进一步地规定输出空间<span class="math inline">\(\mathcal{Y} \in \{-1, +1\}\)</span>, 其中<span class="math inline">\(y=-1\)</span>时表示拒绝, <span class="math inline">\(y=1\)</span>时表示许可. 这样做的好处是我们可以直接使用<span class="math inline">\(\rm sign\)</span>函数来求出<span class="math inline">\(y\)</span>的值, 具体地说, 假设集合<span class="math inline">\(\mathcal{H}\)</span>中的每个元素<span class="math inline">\(h \in \mathcal{H}\)</span>都有如下形式 <span class="math display">\[
+h({\bf x}) ={\rm sign}((\sum_{i=1}^d w_ix_i) - {\rm threshold})
+\]</span> 其中<span class="math inline">\({\rm sign}\)</span>函数的定义为 <span class="math display">\[
+{\rm sign}(x) = \begin{cases} +1 &amp; {\rm if \ } x&gt;0 \\ -1 &amp; {\rm if \ } x&lt;0 \end{cases}
+\]</span> 即对用户的所有属性做一个加权打分, 看它是否超过阈值. 如果超过, 则批准; 否则就拒绝(如果正好等于阈值, 这种情况很少发生, 甚至可以随机决定<span class="math inline">\(y\)</span>是<span class="math inline">\(-1\)</span>还是<span class="math inline">\(1\)</span>).</p>
+<p>这里我们说<span class="math inline">\(\mathcal{H}\)</span>是一个集合的原因是, 不同的<span class="math inline">\(\bf w\)</span>和<span class="math inline">\(\rm threshold\)</span>都对应了不同的<span class="math inline">\(h\)</span>, 所有这些可能性对应的所有<span class="math inline">\(h\)</span>构成了最后的假设集合<span class="math inline">\(\mathcal{H}\)</span>. <span class="math inline">\(h\)</span>这样的函数类型称为<strong>感知机(perceptron)</strong>, 其中<span class="math inline">\(\bf w\)</span>称为权重. 进一步地, 假设我们把<span class="math inline">\(-\rm threshold\)</span>看做是<span class="math inline">\((-\rm threshold) \cdot (+1)\)</span>, 然后把<span class="math inline">\(+1\)</span>看作是<span class="math inline">\(x_0\)</span>, 那么前面的公式形式可以进一步的简化, 即 <span class="math display">\[
 \begin{align*}
-h({\bf x}) &= {\rm sign}((\sum_{i=1}^d w_ix_i) - {\rm threshold}) \\
-&= {\rm sign}((\sum_{i=1}^d w_ix_i)+\underbrace{(-{\rm threshold})}_{w_0}\cdot \underbrace{(+1)}_{x_0}) \\
-&= {\rm sign}(\sum_{i=0}^d w_ix_i) \\
-&= {\rm sign}({\bf w}^\mathsf{T}{\bf x}) 
-\end{align*}</script><p>这里$\bf w$和$\bf x$都看作是列向量, 即维度为$(d+1)1$</p>
-<p>我们可以通过一个图例来加强理解. 假如我们顾客的特征数(也就是前面说的属性维度)为$2$, 那么我们可以把任意输入$\bf x$画在一个平面$\mathbb{R}^2$上(类似的, 如果特征数为$d$, 那么每个输入$\bf x$都可以在$\mathbb{R}^d$空间表示, 只是会对我们的可视化造成困难), 每个输入对应平面上的一个点. 这样, $\mathbb{R}^2$上的$h$都有如下形式:</p>
-<script type="math/tex; mode=display">
-h(\bf x) = \rm sign(w_0+w_1x_1+w_2x_2)</script><p>可以看出, 每个$h$其实都对应了$\mathbb{R}^2$上的一条直线. 感知机规定位于直线某一侧的样本都被判定为正例, 另一侧的样本都被判定为负例. 不同的权重会产生不同的分类方式. 假设我们用蓝色的圈o表示正例, 红色的叉×表示负例, 下图给出了两个不同的感知机</p>
-<p><img src="/2018/09/10/机器学习基石-2-学习判断是与非/1.png" alt="1"></p>
-<p><img src="/2018/09/10/机器学习基石-2-学习判断是与非/2.png" alt="2"></p>
+h({\bf x}) &amp;= {\rm sign}((\sum_{i=1}^d w_ix_i) - {\rm threshold}) \\
+&amp;= {\rm sign}((\sum_{i=1}^d w_ix_i)+\underbrace{(-{\rm threshold})}_{w_0}\cdot \underbrace{(+1)}_{x_0}) \\
+&amp;= {\rm sign}(\sum_{i=0}^d w_ix_i) \\
+&amp;= {\rm sign}({\bf w}^\mathsf{T}{\bf x}) 
+\end{align*}
+\]</span></p>
+<p>这里<span class="math inline">\(\bf w\)</span>和<span class="math inline">\(\bf x\)</span>都看作是列向量, 即维度为<span class="math inline">\((d+1)1\)</span></p>
+<p>我们可以通过一个图例来加强理解. 假如我们顾客的特征数(也就是前面说的属性维度)为<span class="math inline">\(2\)</span>, 那么我们可以把任意输入<span class="math inline">\(\bf x\)</span>画在一个平面<span class="math inline">\(\mathbb{R}^2\)</span>上(类似的, 如果特征数为<span class="math inline">\(d\)</span>, 那么每个输入<span class="math inline">\(\bf x\)</span>都可以在<span class="math inline">\(\mathbb{R}^d\)</span>空间表示, 只是会对我们的可视化造成困难), 每个输入对应平面上的一个点. 这样, <span class="math inline">\(\mathbb{R}^2\)</span>上的<span class="math inline">\(h\)</span>都有如下形式: <span class="math display">\[
+h({\bf x}) = \rm sign(w_0+w_1x_1+w_2x_2)
+\]</span> 可以看出, 每个<span class="math inline">\(h\)</span>其实都对应了<span class="math inline">\(\mathbb{R}^2\)</span>上的一条直线. 感知机规定位于直线某一侧的样本都被判定为正例, 另一侧的样本都被判定为负例. 不同的权重会产生不同的分类方式. 假设我们用蓝色的圈o表示正例, 红色的叉×表示负例, 下图给出了两个不同的感知机</p>
+<div class="figure">
+<img src="/2018/09/10/原机器学习基石-2-学习判断是与非/1.png" alt="1">
+<p class="caption">1</p>
+</div>
+<div class="figure">
+<img src="/2018/09/10/原机器学习基石-2-学习判断是与非/2.png" alt="2">
+<p class="caption">2</p>
+</div>
 <p>可以看出来右边的感知机在训练集上效果更好, 因为它对所有例子做出了正确分类. 而左侧的感知机在训练集上表现稍逊(一个正例被误判为负, 两个负例被误判为正)</p>
-<p>由于感知机都对应于一个超平面, 因此它也被称为是<strong>线性分类器</strong>($\mathbb R_2$的超平面是一条直线, $\mathbb R_3$的超平面是一个平面, 以此类推).</p>
+<p>由于感知机都对应于一个超平面, 因此它也被称为是<strong>线性分类器</strong>(<span class="math inline">\(\mathbb R^2\)</span>的超平面是一条直线, <span class="math inline">\(\mathbb R^3\)</span>的超平面是一个平面, 以此类推).</p>
+<h3 id="感知机学习算法">感知机学习算法</h3>
+<p>在我们知道了<span class="math inline">\(h \in \mathcal H\)</span>的形态以后, 接下来的问题是设计算法<span class="math inline">\(\mathcal A\)</span>来选出最优的<span class="math inline">\(g\)</span>来逼近理想的<span class="math inline">\(f\)</span>. 尽管我们不知道<span class="math inline">\(f\)</span>具体应该是什么, 但是我们知道数据<span class="math inline">\(\mathcal D\)</span>是由<span class="math inline">\(f\)</span>生成的. 因此我们有理由相信, 好的<span class="math inline">\(g\)</span>满足对所有我们已经收集道的数据, 其输出与<span class="math inline">\(f\)</span>的输出尽可能接近, 即<span class="math inline">\(g({\bf x}_n) = f({\bf x}_n) = y_n\)</span>. 因此, 我们可以先找一个超平面, 至少能够对训练集中的数据正确分类. 然而难度在于, <span class="math inline">\(\mathcal H\)</span>的大小通常都是无限的.</p>
+<p>一种解决方案是, 我们可以先初始化一个超平面<span class="math inline">\(g_0\)</span>为了简单起见将其以其权重(为了简单起见, 将其以其权重<span class="math inline">\({\bf w}_0\)</span>代表, 称为初始权重). 我们允许这个超平面犯错, 但我们要设计算法, 让超平面遇到<span class="math inline">\(\mathcal D\)</span>中的错分样本以后可以修正自己. 通常我们可以将<span class="math inline">\({\bf w}_0\)</span>初始化为零向量<span class="math inline">\(\bf 0\)</span>. 然后, 在每一步<span class="math inline">\(t\)</span>, 找到一个使<span class="math inline">\({\bf w}_t\)</span>错分的样本错分的样本<span class="math inline">\(({\bf x}_{n(t)}, y_{n(t)})\)</span>. 即有 <span class="math display">\[
+\rm sign({\bf w}^T_t {\bf x}_{n(t)}) \not= y_{n(t)}
+\]</span> 接下里我们试着修正<span class="math inline">\({\bf w}_t\)</span>. 可以看到错分有两种情况:</p>
+<ul>
+<li><p><span class="math inline">\(y\)</span>本来应该是<span class="math inline">\(+1\)</span>, 但是模型判断出来是负值. 也就是说此时<span class="math inline">\(\bf w\)</span>与<span class="math inline">\(\bf x\)</span>之间的角度太大, 因此需要把<span class="math inline">\(\bf w\)</span>往靠近<span class="math inline">\(\bf x\)</span>的方向旋转使它们的角度变小. 可以通过让<span class="math inline">\({\bf w}_{t+1} \leftarrow {\bf w}_t + y_{n(t)} {\bf x}_{n(t)}\)</span>达到这个目的</p></li>
+<li><p><span class="math inline">\(y\)</span>本来应该是<span class="math inline">\(-1\)</span>, 但是模型判断出来是正值. 也就是说此时<span class="math inline">\(\bf w\)</span>与<span class="math inline">\(\bf x\)</span>之间的角度太小, 因此需要把<span class="math inline">\(\bf w\)</span>往远离<span class="math inline">\(\bf x\)</span>的方向旋转使它们的角度变大. 考虑到符号, 其实也可以通过让<span class="math inline">\({\bf w}_{t+1} \leftarrow {\bf w}_t + y_{n(t)} {\bf w}_{n(t)}\)</span>达到这个目的</p></li>
+</ul>
+<p>因此, 在<span class="math inline">\(t+1\)</span>时刻, 我们总可以通过下式来修正<span class="math inline">\({\bf w}_t\)</span>, 即 <span class="math display">\[
+{\bf w}_{t+1} \leftarrow {\bf w}_t + y_{n(t)}{\bf x}_{n(t)}
+\]</span></p>
+<div class="figure">
+<img src="/2018/09/10/原机器学习基石-2-学习判断是与非/3.png" alt="3">
+<p class="caption">3</p>
+</div>
+<div class="figure">
+<img src="/2018/09/10/原机器学习基石-2-学习判断是与非/4.png" alt="4">
+<p class="caption">4</p>
+</div>
+<p>感知机学习算法(Perceptron Learning Algorithm, PLA)就是重复上面的过程, 直到没有错误发生为止. 算法将最后得到的权重<span class="math inline">\(\bf w\)</span>(记做<span class="math inline">\({\bf w}_{PLA}\)</span>)返回<span class="math inline">\(g\)</span>. 完整写法如下:</p>
+<p>对于<span class="math inline">\(t = 0,1, \ldots\)</span></p>
+<p>1). 找到一个使<span class="math inline">\({\bf w}_t\)</span>错分的样本<span class="math inline">\(({\bf x}_{n(t)}, y_{n(t)})\)</span>. 即有 <span class="math display">\[
+sign({\bf w}_t^T {\bf x}_{n(t)}) \not = y_{n(t)}
+\]</span> 2). 以如下方法修正<span class="math inline">\({\bf w}_t\)</span>: <span class="math display">\[
+{\bf w}_{t+1} \leftarrow {\bf w}_t + y_{n(t)}{\bf x}_{n(t)}
+\]</span> 直到便利了所有样本一遍以后都没有找到错误为止.</p>
+<p>由此, 也引出两个问题:</p>
+<ul>
+<li>算法真的会停止吗?</li>
+<li>能否确定算法返回的<span class="math inline">\(g \approx f\)</span>?</li>
+</ul>
 
       
     </div>
@@ -664,7 +704,7 @@ h(\bf x) = \rm sign(w_0+w_1x_1+w_2x_2)</script><p>可以看出, 每个$h$其实�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机假设集合"><span class="nav-text">感知机假设集合</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机假设集合"><span class="nav-text">感知机假设集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习算法"><span class="nav-text">感知机学习算法</span></a></li></ol></div>
             
 
           </div>
