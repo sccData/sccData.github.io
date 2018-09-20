@@ -139,7 +139,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/2.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/3.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/4.png">
-<meta property="og:updated_time" content="2018-09-19T11:37:23.067Z">
+<meta property="og:updated_time" content="2018-09-20T03:19:55.816Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石 2.学习判断是与非">
 <meta name="twitter:description" content="感知机假设集合">
@@ -467,7 +467,7 @@ h({\bf x}) = \rm sign(w_0+w_1x_1+w_2x_2)
 <p>由于感知机都对应于一个超平面, 因此它也被称为是<strong>线性分类器</strong>(<span class="math inline">\(\mathbb R^2\)</span>的超平面是一条直线, <span class="math inline">\(\mathbb R^3\)</span>的超平面是一个平面, 以此类推).</p>
 <h3 id="感知机学习算法">感知机学习算法</h3>
 <p>在我们知道了<span class="math inline">\(h \in \mathcal H\)</span>的形态以后, 接下来的问题是设计算法<span class="math inline">\(\mathcal A\)</span>来选出最优的<span class="math inline">\(g\)</span>来逼近理想的<span class="math inline">\(f\)</span>. 尽管我们不知道<span class="math inline">\(f\)</span>具体应该是什么, 但是我们知道数据<span class="math inline">\(\mathcal D\)</span>是由<span class="math inline">\(f\)</span>生成的. 因此我们有理由相信, 好的<span class="math inline">\(g\)</span>满足对所有我们已经收集道的数据, 其输出与<span class="math inline">\(f\)</span>的输出尽可能接近, 即<span class="math inline">\(g({\bf x}_n) = f({\bf x}_n) = y_n\)</span>. 因此, 我们可以先找一个超平面, 至少能够对训练集中的数据正确分类. 然而难度在于, <span class="math inline">\(\mathcal H\)</span>的大小通常都是无限的.</p>
-<p>一种解决方案是, 我们可以先初始化一个超平面<span class="math inline">\(g_0\)</span>为了简单起见将其以其权重(为了简单起见, 将其以其权重<span class="math inline">\({\bf w}_0\)</span>代表, 称为初始权重). 我们允许这个超平面犯错, 但我们要设计算法, 让超平面遇到<span class="math inline">\(\mathcal D\)</span>中的错分样本以后可以修正自己. 通常我们可以将<span class="math inline">\({\bf w}_0\)</span>初始化为零向量<span class="math inline">\(\bf 0\)</span>. 然后, 在每一步<span class="math inline">\(t\)</span>, 找到一个使<span class="math inline">\({\bf w}_t\)</span>错分的样本错分的样本<span class="math inline">\(({\bf x}_{n(t)}, y_{n(t)})\)</span>. 即有 <span class="math display">\[
+<p>一种解决方案是, 我们可以先初始化一个超平面<span class="math inline">\(g_0\)</span>(为了简单起见, 将其以其权重<span class="math inline">\({\bf w}_0\)</span>代表, 称为初始权重). 我们允许这个超平面犯错, 但我们要设计算法, 让超平面遇到<span class="math inline">\(\mathcal D\)</span>中的错分样本以后可以修正自己. 通常我们可以将<span class="math inline">\({\bf w}_0\)</span>初始化为零向量<span class="math inline">\(\bf 0\)</span>. 然后, 在每一步<span class="math inline">\(t\)</span>, 找到一个使<span class="math inline">\({\bf w}_t\)</span>错分的样本错分的样本<span class="math inline">\(({\bf x}_{n(t)}, y_{n(t)})\)</span>. 即有 <span class="math display">\[
 \rm sign({\bf w}^T_t {\bf x}_{n(t)}) \not= y_{n(t)}
 \]</span> 接下里我们试着修正<span class="math inline">\({\bf w}_t\)</span>. 可以看到错分有两种情况:</p>
 <ul>
@@ -497,6 +497,19 @@ sign({\bf w}_t^T {\bf x}_{n(t)}) \not = y_{n(t)}
 <li>算法真的会停止吗?</li>
 <li>能否确定算法返回的<span class="math inline">\(g \approx f\)</span>?</li>
 </ul>
+<h3 id="感知机的有效性与确定终止性">感知机的有效性与确定终止性</h3>
+<p>回顾PLA算法的停止条件, 它是在没有找到错误的时候才停止, 这要求我们的数据可以用一条线将正例样本和负例样本分割开来(如果不存在这条线, PLA肯定是不可能停止的). 这种条件叫做<strong>线性可分条件</strong>. 接下来, 我们需要证明: 如果数据集的确是线性可分的, 感知机是否总是能找到一个超平面把数据恰好分开.</p>
+<p>假设数据集<span class="math inline">\(\mathcal D\)</span>线性可分, 我们先证明存在一个超平面<span class="math inline">\({\bf w}_f\)</span>使得任意<span class="math inline">\(i \in \{1, \ldots, n\}\)</span>, <span class="math inline">\(y_i = {\rm sign}({\bf w}_f^T{\bf w}_i)\)</span>. 这意味着对每个<span class="math inline">\({\bf x}_i\)</span>, 它与超平面都有一定距离, 即 <span class="math display">\[
+\min_n y_n {\bf w}_f^\mathsf{T}{\bf x}_n &gt; 0
+\]</span> 其中<span class="math inline">\({\bf w}_f^T{\bf x}_n\)</span>是点<span class="math inline">\({\bf w}_n\)</span>到<span class="math inline">\({\bf w}_f\)</span>的带符号的距离. 在训练过程中遇到的所有错分点<span class="math inline">\(({\bf x}_{n(t)}, y_{n(t)})\)</span>(假设在时刻<span class="math inline">\(t\)</span>遇到), 肯定有 <span class="math display">\[
+y_{n(t)}{\bf w}_f^\mathsf{T}{\bf x}_{n(t)} \ge \min_n y_n {\bf w}_f^\mathsf{T}{\bf x}_n &gt; 0
+\]</span> 我们可以先证明, <span class="math inline">\({\bf w}_t\)</span>被<span class="math inline">\(({\bf x}_{n(t)}, y_{n(t)})\)</span>纠正以后更加接近纠正以后更加接近<span class="math inline">\({\bf w}_f\)</span>. 我们可以通过两个向量的內积来判断它们是否接近: 两个向量越接近, 內积越大(可以理解为两个向量<span class="math inline">\(\bf u\)</span>和和<span class="math inline">\(\bf v\)</span>越接近, 其夹角, 那么<span class="math inline">\(\cos \theta\)</span>越大, 所以两者的內积<span class="math inline">\({\bf u} \cdot {\bf v} = |\!|{\bf u}|\!||\!|{\bf v}|\!|\cos \theta\)</span>越大), 则 <span class="math display">\[
+\begin{align*}
+{\bf w}_f^\mathsf{T}{\bf w}_{t+1} &amp;= {\bf w}_t^\mathsf{T}({\bf w}_t + y_{n(t)}{\bf x}_{n(t)}) \\
+&amp;\ge {\bf w}_f^\mathsf{T}{\bf w}_t + \min_n y_n {\bf w}_f^\mathsf{T}{\bf x}_n \\
+&amp;&gt; {\bf w}_f^\mathsf{T}{\bf w}_t + 0 = {\bf w}_f^\mathsf{T}{\bf w}_t\hspace{3ex} \blacksquare
+\end{align*}
+\]</span></p>
 
       
     </div>
@@ -704,7 +717,7 @@ sign({\bf w}_t^T {\bf x}_{n(t)}) \not = y_{n(t)}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机假设集合"><span class="nav-text">感知机假设集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习算法"><span class="nav-text">感知机学习算法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机假设集合"><span class="nav-text">感知机假设集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习算法"><span class="nav-text">感知机学习算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机的有效性与确定终止性"><span class="nav-text">感知机的有效性与确定终止性</span></a></li></ol></div>
             
 
           </div>
