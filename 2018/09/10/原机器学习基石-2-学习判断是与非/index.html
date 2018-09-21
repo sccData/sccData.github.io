@@ -139,7 +139,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/2.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/3.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/10/原机器学习基石-2-学习判断是与非/4.png">
-<meta property="og:updated_time" content="2018-09-20T03:19:55.816Z">
+<meta property="og:updated_time" content="2018-09-21T14:04:02.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石 2.学习判断是与非">
 <meta name="twitter:description" content="感知机假设集合">
@@ -499,7 +499,7 @@ sign({\bf w}_t^T {\bf x}_{n(t)}) \not = y_{n(t)}
 </ul>
 <h3 id="感知机的有效性与确定终止性">感知机的有效性与确定终止性</h3>
 <p>回顾PLA算法的停止条件, 它是在没有找到错误的时候才停止, 这要求我们的数据可以用一条线将正例样本和负例样本分割开来(如果不存在这条线, PLA肯定是不可能停止的). 这种条件叫做<strong>线性可分条件</strong>. 接下来, 我们需要证明: 如果数据集的确是线性可分的, 感知机是否总是能找到一个超平面把数据恰好分开.</p>
-<p>假设数据集<span class="math inline">\(\mathcal D\)</span>线性可分, 我们先证明存在一个超平面<span class="math inline">\({\bf w}_f\)</span>使得任意<span class="math inline">\(i \in \{1, \ldots, n\}\)</span>, <span class="math inline">\(y_i = {\rm sign}({\bf w}_f^T{\bf w}_i)\)</span>. 这意味着对每个<span class="math inline">\({\bf x}_i\)</span>, 它与超平面都有一定距离, 即 <span class="math display">\[
+<p>假设数据集<span class="math inline">\(\mathcal D\)</span>线性可分, 我们先证明存在一个超平面<span class="math inline">\({\bf w}_f\)</span>使得任意<span class="math inline">\(i \in \{1, \ldots, n\}\)</span>, <span class="math inline">\(y_i = {\rm sign}({\bf w}_f^T{\bf x}_i)\)</span>. 这意味着对每个<span class="math inline">\({\bf x}_i\)</span>, 它与超平面都有一定距离, 即 <span class="math display">\[
 \min_n y_n {\bf w}_f^\mathsf{T}{\bf x}_n &gt; 0
 \]</span> 其中<span class="math inline">\({\bf w}_f^T{\bf x}_n\)</span>是点<span class="math inline">\({\bf w}_n\)</span>到<span class="math inline">\({\bf w}_f\)</span>的带符号的距离. 在训练过程中遇到的所有错分点<span class="math inline">\(({\bf x}_{n(t)}, y_{n(t)})\)</span>(假设在时刻<span class="math inline">\(t\)</span>遇到), 肯定有 <span class="math display">\[
 y_{n(t)}{\bf w}_f^\mathsf{T}{\bf x}_{n(t)} \ge \min_n y_n {\bf w}_f^\mathsf{T}{\bf x}_n &gt; 0
@@ -510,6 +510,56 @@ y_{n(t)}{\bf w}_f^\mathsf{T}{\bf x}_{n(t)} \ge \min_n y_n {\bf w}_f^\mathsf{T}{\
 &amp;&gt; {\bf w}_f^\mathsf{T}{\bf w}_t + 0 = {\bf w}_f^\mathsf{T}{\bf w}_t\hspace{3ex} \blacksquare
 \end{align*}
 \]</span></p>
+<p>但是这里又有一个新的问题, 即內积变大不一定说明两个向量接近, 因为向量长度变大也会导致內积变大. 因此接下来我们要证明, 修正<span class="math inline">\({\bf w}_t\)</span>以后, 新的权重长度不会发生太大的变化. 这里要用到一个性质, 即<span class="math inline">\(PLA\)</span>仅在遇到错误的数据时才更新权重, 即如果权重<span class="math inline">\({\bf w}_t\)</span>被订正, 意味着<span class="math inline">\(sign({\bf w}_t^T{\bf w}_{n(t)}) \not = y_{n(t)}\)</span>, 也就是<span class="math inline">\(y_{n(t)}{\bf w}_t^T{\bf x}_{n(t)} \le 0\)</span>. 考虑到<span class="math inline">\(y_{n(t)}\)</span>是标量, 且取值只可能为<span class="math inline">\(1\)</span>或<span class="math inline">\(-1\)</span>(即<span class="math inline">\(y_{n(t)}^2 = 1\)</span>), <span class="math inline">\({\bf w}_t^T{\bf x}_{n(t)}\)</span>也是标量, 因此 <span class="math display">\[
+\begin{align*}
+|\!|{\bf w}_{t+1}|\!|^2 &amp;= |\!|{\bf w}_t + y_{n(t)}{\bf x}_{n(t)}|\!|^2
+\end{align*}
+\]</span> 简记<span class="math inline">\(y = y_{n(t)}\)</span>, <span class="math inline">\({\bf x} = {\bf x}_{n(t)}\)</span>, <span class="math inline">\({\bf w} = {\bf w}_t\)</span>, 则 <span class="math display">\[
+\begin{align*}
+|\!|{\bf w}_{t+1}|\!|^2 &amp;= ({\bf w}+y{\bf x})^\mathsf{T}({\bf w}+y{\bf x}) \\
+&amp;= {\bf w}^\mathsf{T}{\bf w} + 2y{\bf w}^\mathsf{T}{\bf x} + {\bf x}^\mathsf{T}{\bf x} \\
+&amp;\le |\!|{\bf w}|\!|^2 + |\!|{\bf x}|\!|^2 \hspace{3ex}(\because y{\bf w}^\mathsf{T}{\bf x} \le 0) \\
+&amp;\le |\!|{\bf w}|\!|^2 + \max_n|\!|{\bf x}_n|\!|^2
+\end{align*}
+\]</span> 即权重经过修正以后, 其长度最多增加<span class="math inline">\(\max_n |\!|{\bf x}_n|\!|^2\)</span></p>
+<p>经由上面两部分, 假设权重的初始向量为<span class="math inline">\(\bf 0\)</span>, 我们可以求出经过<span class="math inline">\(T\)</span>步更新最后得到的权重<span class="math inline">\({\bf w}_{T}\)</span>与<span class="math inline">\(\bf w_{f}\)</span>之间的夹角余弦值的下界. 为了求这个值, 只需要求两个权重归一化以后內积的下界即可, 即 <span class="math display">\[
+\inf \left(\frac{ {\bf w}_f^\mathsf{T}} {|\!|{\bf w}_f|\!|} \cdot \frac{{\bf w}_T}{|\!|{\bf w}_T|\!|} \right)
+\]</span> 先看分子. 由于初始<span class="math inline">\({\bf w}_0 = {\bf 0}\)</span>, 因此由之前第一个证明的中间步骤, 我们可以写出第一次更新、第二次更新......后分子的下界, 即 <span class="math display">\[
+\begin{align*}
+{\bf w}_f^\mathsf{T}{\bf w}_1 &amp;\ge {\bf w}_f^\mathsf{T} \cdot {\bf 0} + \min_n y_n{\bf w}_f^\mathsf{T}{\bf x}_n \\
+{\bf w}_f^\mathsf{T}{\bf w}_2 &amp;\ge {\bf w}_f^\mathsf{T}\cdot{\bf w}_1 + \min_n y_n{\bf w}_f^\mathsf{T}{\bf x}_n \ge {\bf x}_f^\mathsf{T} \cdot {\bf 0} + 2\min_n y_n{\bf w}_f^\mathsf{T}{\bf x}_n \\
+&amp;\vdots \\
+{\bf w}_f^\mathsf{T}{\bf w}_T &amp;\ge T \min_n y_n{\bf w}_f^\mathsf{T}{\bf x}_n
+\end{align*}
+\]</span></p>
+<p>类似地, 对分母有 <span class="math display">\[
+|\!|{\bf w}_T|\!|^2 \le T\max_n|\!|{\bf x}_n|\!|^2
+\]</span> 因此, <span class="math display">\[
+\begin{align*}
+\frac{ {\bf w}_f^\mathsf{T}}{|\!|{\bf w}_f|\!|} \cdot \frac{ {\bf w}_T}{|\!|{\bf w}_T|\!|} &amp;\ge \frac{T\min_n y_n{\bf w}_f^\mathsf{T}{\bf x}_n}{|\!|{\bf w}_f|\!|\sqrt{T\max_n|\!|{\bf x}_n|\!|^2}} \\
+&amp;= \sqrt{T}\cdot \frac{\min_n y_n{\bf w}_f^\mathsf{T}{\bf x}_n}{|\!|{\bf w}_f|\!|\sqrt{\max_n|\!|{\bf x}_n|\!|^2}}
+\end{align*}
+\]</span> 按照Fun TIme中的记法, 记<span class="math inline">\(R^2 = \max_n |\!|{\bf x}_n|\!|^2, \rho = \min_n y_n \frac{{\bf w}_f^\mathsf{T}}{|\!|{\bf w}_f |\!|}{\bf x}_n\)</span>, 则 <span class="math display">\[
+\frac{ {\bf w}_f^\mathsf{T}}{|\!|{\bf w}_f|\!|} \cdot \frac{ {\bf w}_T}{|\!|{\bf w}_T|\!|} \ge \sqrt{T}\cdot\frac{\rho}{R}
+\]</span> 由向量除以其长度得到的是单位向量, 长度为<span class="math inline">\(1\)</span>, 在这种情况下, 两者內积越大一定意味着两者夹角越小, 距离越近. 但是这里需要注意的是, 两者的距离不会无限接近, 到<span class="math inline">\(\cos \theta = 1\)</span>时会停止, 因为两个单位向量的內积最大值为1, 因此从上面的不等式可推出 <span class="math display">\[
+\sqrt{T} \cdot \frac{\rho}{R} \le 1 \Rightarrow T \le \frac{R^2}{\rho^2}
+\]</span> 即算法至多更新<span class="math inline">\(\frac{R^2}{\rho^2}\)</span>步后一定会停止.</p>
+<h3 id="感知机在线性不可分数据上的应用">感知机在线性不可分数据上的应用</h3>
+<p>由上面的证明, 假设数据集是线性可分的, 那么<span class="math inline">\(PLA\)</span>算法最后肯定会停止, 而且(对训练集)给出正确的分类. 该算法非常容易实现, 而且结束很快, 使用于任意<span class="math inline">\(\mathbb{R}^d\)</span>空间. 但是这个算法最大的问题, 它提前假设训练集是训练可分的, 而且我们不知道算法什么时候会终止(因为上面给出的上限中用到了<span class="math inline">\({\bf w}_f\)</span>, 而我们不知道它是多少--甚至不知道是否存在!(在线性不可分的时候该向量不存在))</p>
+<p>那么我们来考虑一个最坏的情况, 即数据若的确是线性不可分的话, 应该如何应对. 由于数据产生的过程中可能会混入噪声, 这使得原本线性可分的数据也可能因为噪声的存在而不可分. 但是, 一般情况下, 噪声应该是一小部分, 即我们可以退而且其次, 不去寻找一个完美的超平面, 而是去寻找一个犯错误最少的超平面, 即 <span class="math display">\[
+{\bf w}_g \leftarrow \mathop{{\rm arg}\min}_{\bf w} \sum_{n=1}^N [\![ y_n \not = {\rm sign}({\bf w}^\mathsf{T}{\bf x}_n)]\!]
+\]</span> 然而, 求解这个问题被证明是NP难的, 只能采用近似算法求解. 例如, 我们可以保存一个最好的权重, 该权重到目前为止错分的数量最少. 该算法被称为&quot;口袋法&quot;, 其完整细节如下:</p>
+<p>设定初始权重<span class="math inline">\(\hat{\bf w}\)</span></p>
+<p>对时刻<span class="math inline">\(t=0, 1, \cdots\)</span></p>
+<ol style="list-style-type: decimal">
+<li><p>随机寻找一个<span class="math inline">\({\bf w}_t\)</span>错分的样本<span class="math inline">\(({\bf x}_{n(t)}, y_{n(t)})\)</span></p></li>
+<li><p>试图通过如下方法修正<span class="math inline">\({\bf w}_t\)</span> <span class="math display">\[
+   {\bf w}_{t+1} \leftarrow {\bf w}_t + y_{n(t)}{\bf x}_{n(t)}
+   \]</span></p></li>
+<li><p>如果<span class="math inline">\({\bf w}_{t+1}\)</span>犯的错误比<span class="math inline">\(\hat{\bf w}\)</span>少, 那么将<span class="math inline">\(\hat{\bf w}\)</span>替换为<span class="math inline">\({\bf w}_{t+1}\)</span></p></li>
+</ol>
+<p>直到足够多次迭代完成. 我们将<span class="math inline">\(\hat{\bf w}\)</span>(称为<span class="math inline">\({\bf w}_{pocket}\)</span>)返回为<span class="math inline">\(g\)</span></p>
+<p>注意在线性可分集合上也可以使用口袋法, 算法也可以返回一个无训练误差的解. 但是由于每次更新权重以后, 都要在所有数据上使用新旧权重各跑一遍, 来计算错分数量, 因此口袋法的执行时间通常比原始<span class="math inline">\(PLA\)</span>的计算时间长很多.</p>
 
       
     </div>
@@ -717,7 +767,7 @@ y_{n(t)}{\bf w}_f^\mathsf{T}{\bf x}_{n(t)} \ge \min_n y_n {\bf w}_f^\mathsf{T}{\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机假设集合"><span class="nav-text">感知机假设集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习算法"><span class="nav-text">感知机学习算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机的有效性与确定终止性"><span class="nav-text">感知机的有效性与确定终止性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机假设集合"><span class="nav-text">感知机假设集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机学习算法"><span class="nav-text">感知机学习算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机的有效性与确定终止性"><span class="nav-text">感知机的有效性与确定终止性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机在线性不可分数据上的应用"><span class="nav-text">感知机在线性不可分数据上的应用</span></a></li></ol></div>
             
 
           </div>
