@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-22T06:36:23.715Z</updated>
+  <updated>2018-09-25T06:23:25.680Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>机器学习基石 3.机器学习的类型</title>
+    <link href="http://yoursite.com/2018/09/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%9F%B3-3-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://yoursite.com/2018/09/25/机器学习基石-3-机器学习的类型/</id>
+    <published>2018-09-25T05:42:31.000Z</published>
+    <updated>2018-09-25T06:23:25.680Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="根据输出空间mathcaly分类">根据输出空间<span class="math inline">\(\mathcal{Y}\)</span>分类</h3><a id="more"></a><h4 id="二分类问题">二分类问题</h4><p>重新回顾一下&quot;是非题&quot;的形式. 为了解决这个问题, 需要我们提供一批训练数据<span class="math inline">\(\mathcal{D}\)</span>, 其中我们需要指出对哪些用户发放信用卡, 哪些不发. 像这样答案只有两种可能性(&quot;要&quot;或&quot;不要&quot;)的问题称为<strong>二元分类问题</strong>, 其输出空间<span class="math inline">\(\mathcal{Y}\)</span>通常用集合<span class="math inline">\(\{-1, +1\}\)</span>表示, 类似于&quot;判断题&quot;. 这种问题类型的例子有很多, 包括</p><ul><li>要不要发信用卡</li><li>电子邮件是不是垃圾邮件</li><li>病人有没有生病</li><li>广告是否会赚钱</li></ul><p>等等。</p><p>二元分类问题是机器学习中最基本也是最核心的问题, 很多理论推到和算法模型设计都是从这一类问题出发.</p><h4 id="多分类问题">多分类问题</h4><p>二元分类问题很容易进行扩展, 即如果答案有多个离散的可能性, 那么问题演变为<strong>多元分类问题</strong>. 假设目标类别有<span class="math inline">\(K\)</span>种, 那么<span class="math inline">\(\mathcal{Y}=\{1, 2, \cdots, K\}\)</span>. 一个典型的例子是对硬币进行分类, 看投入的是<span class="math inline">\(1\)</span>角、<span class="math inline">\(5\)</span>角还是<span class="math inline">\(1\)</span>元. 这种问题类似于“选择题”. 这种问题类型的例子包括</p><ul><li>识别手写数字是<span class="math inline">\(0\)</span>到<span class="math inline">\(9\)</span>这十个数字中的哪一种</li><li>识别图片中的水果是哪一种水果</li><li>邮件的进一步分类, 例如是垃圾邮件、社交网络邮件、重要邮件还是促销活动邮件等等</li></ul><h4 id="回归问题">回归问题</h4><p>如果将医疗领域中的问题对应到上述问题中, 那么这两种问题可以对应如下：</p><ul><li>二元分类问题：给定病人特征, 判断病人是否患病</li><li>多元分类问题：给定病人特征, 判断病人患的是哪种癌症</li></ul><p>但是还有一类问题， 例如判断病人手术后多少天可以出院. 这种问题的输出是整个实数集, 或者实数集中的一个连续区间. 这种问题通常被称为<strong>回归分析</strong>. 此时<span class="math inline">\(\mathcal{Y} \in \mathbb{R}\)</span>或<span class="math inline">\(\mathcal{Y} = [{\rm lower},{\rm upper}] \subset \mathbb{R}\)</span>. 这种问题类型的例子包括</p><ul><li>根据公司的状况, 预测其次日股票价格</li><li>根据大气状况, 预测明日气温</li></ul><p>回归问题是一种历史悠久的统计问题, 也是机器学习领域里非常核心的问题</p><h4 id="结构化分析">结构化分析</h4><p>在自然语言处理(<span class="math inline">\(\rm NLP\)</span>)这个领域里, 有一项任务是对输入句子中的每个词标注其词性(<span class="math inline">\({\rm Part\ of\ Speech}, {\rm POS}\)</span>). 例如输入&quot;<span class="math inline">\(\rm {I\ love\ ML}\)</span>&quot;, 程序应该可以将&quot;I&quot;标记为代词, &quot;<span class="math inline">\(\rm{love}\)</span>&quot;标记为动词, &quot;<span class="math inline">\(\rm{ML}\)</span>&quot;标记为名词. 这种任务可以看作是一种多元分类问题, 但是如果输入是以句子为单位, 由于句子中有结构性, 因此输出也是一个结构. 这样的问题可以看做是一个巨大的多类别分类问题, 各个类别是隐藏的, 看不到, 而且不同类别之间有联系, 使得穷举所有可能性变得不可能. 但是我们知道输出存在一定的结构性, 并希望程序能够正确给出判定. 这种问题称为<strong>结构化分析</strong>, 此时<span class="math inline">\(\mathcal{Y}\)</span>是一种结构. 这种问题类型的例子包括</p><ul><li>给定蛋白质数据, 判断蛋白质的结构</li><li>给定语言文本, 给出语法树</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;根据输出空间mathcaly分类&quot;&gt;根据输出空间&lt;span class=&quot;math inline&quot;&gt;\(\mathcal{Y}\)&lt;/span&gt;分类&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="课程笔记" scheme="http://yoursite.com/categories/%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>机器学习基石 2.学习判断是与非</title>
