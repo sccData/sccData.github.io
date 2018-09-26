@@ -333,6 +333,242 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/26/数据结构与算法-1-王争/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="史崇辰">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="scc技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/26/数据结构与算法-1-王争/" itemprop="url">复杂度分析（上）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-26T20:06:30+08:00">
+                2018-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/课程笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">课程笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+          
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除</p>
+</blockquote>
+<h3 id="为什么需要复杂度分析">为什么需要复杂度分析？</h3>
+<p>很多人对复杂度分析有疑问, 认为直接在机器上跑一遍, 就可以得出时间和空间复杂度. 对于这种说法, 我们认为是正确的, 并且很多书籍将其称为<strong>事后统计</strong>. 但是, 这种方法有很大的局限性.</p>
+<ul>
+<li>测试结果依赖于测试环境</li>
+</ul>
+<p>不同的硬件对测试结果影响较大</p>
+<ul>
+<li>测试结果受数据规模的影响很大</li>
+</ul>
+<p>数据规模的大小和有序度, 对测试结果影响较大</p>
+<p>所以, 我们需要一个不用具体的测试数据来测试, 就可以粗略地估计算法的执行效率的方法.</p>
+<h3 id="大o复杂度表示法">大<span class="math inline">\(O\)</span>复杂度表示法</h3>
+<p>以一段代码为例来估计算法的执行时间</p>
+<pre><code>int cal(int n) {
+    int sum = 0;
+    int i = 1;
+    for(; i &lt;= n; ++i){
+        sum = sum + i;
+    }
+    return sum;
+}</code></pre>
+<p>由于是粗略估计, 假设每行代码执行的时间都一样, 为<span class="math inline">\(t\)</span>. 第2、3行代码分别需要1个<span class="math inline">\(t\)</span>的执行时间, 第4、5行都运行了<span class="math inline">\(n\)</span>遍, 所以需要<span class="math inline">\(2 n * t\)</span>的执行时间, 所以这段代码总的执行时间就是<span class="math inline">\((2 n + 2) * t\)</span>. 可以看出来, 所有的代码执行时间<span class="math inline">\(T(n)\)</span>与每行代码的执行次数成正比.</p>
+<p>再看一段代码</p>
+<pre><code>int cal(int n) {
+    int sum = 0;
+    int i = 1;
+    int j = 1;
+    for(; i &lt;= n; ++i){
+        j = 1;
+        for(; j &lt;= n; ++j){
+            sum = sum + i * j;
+        }
+    }
+}</code></pre>
+<p>根据以上思路, 可以得出$T(n) = (2n^2 + 2n + 3) * t $.</p>
+<p><em>从中我们可以总结得到一个非常重要的规律, 所有代码的执行时间<span class="math inline">\(T(n)\)</span>与每行代码的执行次数<span class="math inline">\(n\)</span>成正比</em> <span class="math display">\[
+T(n) = O(f(n))
+\]</span> 其中<span class="math inline">\(T(n)\)</span>表示代码执行的时间; n表示数据规模的大小; <span class="math inline">\(f(n)\)</span>表示每行代码执行的次数总和. 公式中的<span class="math inline">\(O\)</span>, 表示代码的执行时间<span class="math inline">\(T(n)\)</span>与<span class="math inline">\(f(n)\)</span>表达式成正比.</p>
+<p>所以<span class="math inline">\(T(n) = O(2n + 2)\)</span>, <span class="math inline">\(T(n) = O(2n^2 + 2n + 3)\)</span>, 这就是大<span class="math inline">\(O\)</span>时间复杂度表示法. 大<span class="math inline">\(O\)</span>时间复杂度实际表示的是代码执行时间随数据规模增长的变化趋势, 所以, 也叫做渐进时间复杂度, 简称时间复杂度.</p>
+<p>当<span class="math inline">\(n\)</span>很大的时候, 我们只需记录一个最大量级就可以了, 例如<span class="math inline">\(T(n) = O(n)\)</span>; <span class="math inline">\(T(n) = O(n^2)\)</span>.</p>
+<h3 id="时间复杂度分析">时间复杂度分析</h3>
+<ul>
+<li>只关注循环次数最多的一段代码</li>
+</ul>
+<!--￼0-->
+<p>总的时间复杂度为<span class="math inline">\(O(n)\)</span></p>
+<ul>
+<li><p>加法法则: 总复杂度等于量级最大的那段代码的复杂度</p>
+<p>int cal(int n){ int sum_1 = 0; int p = 1; for(; p &lt; 100; ++p){ sum_1 = sum_1 + p; }</p>
+<pre><code>int sum_2 = 0;
+int q = 1;
+for(; q&lt;n; ++q){
+    sum_2 = sum_2 + q;
+}
+
+int sum_3 = 0;
+int i = 1;
+int j = 1;
+for(; i&lt;=n; ++i){
+    for(; j&lt;=n; ++j){
+        sum_3 = sum_3 + i * j;
+    }
+}</code></pre>
+<p>return sum_1 + sum_2 + sum_3; }</p></li>
+</ul>
+<p>总的时间复杂度为<span class="math inline">\(O(n^2)\)</span></p>
+<ul>
+<li><p>乘法法则: 嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</p>
+<p>int cal(int n){ int ret = 0; int i = 1; for(; i&lt;n; ++i){ ret = ret + f(i); } }</p>
+<p>int f(int n){ int sum = 0; int i = 1; for(; i&lt;n; ++i){ sum = sum + i; } return sum; }</p></li>
+</ul>
+<p>总的时间复杂度为<span class="math inline">\(O(n^2)\)</span></p>
+<h3 id="几种常见时间复杂度实例分析">几种常见时间复杂度实例分析</h3>
+<p>复杂度量级(按数量级递增)</p>
+<ul>
+<li>常量阶<span class="math inline">\(O(1)\)</span></li>
+<li>对数阶<span class="math inline">\(O(logn)\)</span></li>
+<li>线性阶<span class="math inline">\(O(n)\)</span></li>
+<li>线性对数阶<span class="math inline">\(O(nlogn)\)</span></li>
+<li>平方阶<span class="math inline">\(O(n^2)\)</span>、立方阶<span class="math inline">\(O(n^3) \cdots k\)</span>次方阶<span class="math inline">\(O(n^k)\)</span></li>
+<li>指数阶<span class="math inline">\(O(2^n)\)</span></li>
+<li>阶乘阶<span class="math inline">\(O(n!)\)</span></li>
+</ul>
+<p>将上述时间复杂度错略的分为两类：<strong>多项式量级</strong>和<strong>非多项式量级</strong>. 其中, 非多项式量级只有两个: <span class="math inline">\(O(2^n)\)</span>和<span class="math inline">\(O(n!)\)</span>.</p>
+<p>我们把时间复杂度为非多项式量级的算法问题叫做<strong>NP问题</strong>(Non-Deterministic Polynomial, 非确定多项式).</p>
+<p>当数据规模<span class="math inline">\(n\)</span>越来越大时, 非多项式量级算法的执行时间会急剧增加.</p>
+<p>因此, NP问题不是我们讨论的重点. 接下来, 我们主要来看几种常见的<strong>多项式时间复杂度</strong>.</p>
+<p><em>未完待续</em></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+    	
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/机器学习基石-3-机器学习的类型/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -816,7 +1052,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -838,7 +1074,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
