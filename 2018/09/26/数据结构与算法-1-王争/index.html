@@ -127,18 +127,18 @@
 
 
 
-<meta name="description" content="+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除  为什么需要复杂度分析？ 很多人对复杂度分析有疑问, 认为直接在机器上跑一遍, 就可以得出时间和空间复杂度. 对于这种说法, 我们认为是正确的, 并且很多书籍将其称为事后统计. 但是, 这种方法有很大的局限性.  测试结果依赖于测试环境  不同的硬件对测试结果影响较大  测试结果受数据规模的影响很大  数">
+<meta name="description" content="+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除">
 <meta name="keywords" content="数据结构与算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="复杂度分析（上）">
 <meta property="og:url" content="http://yoursite.com/2018/09/26/数据结构与算法-1-王争/index.html">
 <meta property="og:site_name" content="scc技术博客">
-<meta property="og:description" content="+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除  为什么需要复杂度分析？ 很多人对复杂度分析有疑问, 认为直接在机器上跑一遍, 就可以得出时间和空间复杂度. 对于这种说法, 我们认为是正确的, 并且很多书籍将其称为事后统计. 但是, 这种方法有很大的局限性.  测试结果依赖于测试环境  不同的硬件对测试结果影响较大  测试结果受数据规模的影响很大  数">
+<meta property="og:description" content="+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-26T16:20:53.593Z">
+<meta property="og:updated_time" content="2018-09-27T02:43:38.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="复杂度分析（上）">
-<meta name="twitter:description" content="+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除  为什么需要复杂度分析？ 很多人对复杂度分析有疑问, 认为直接在机器上跑一遍, 就可以得出时间和空间复杂度. 对于这种说法, 我们认为是正确的, 并且很多书籍将其称为事后统计. 但是, 这种方法有很大的局限性.  测试结果依赖于测试环境  不同的硬件对测试结果影响较大  测试结果受数据规模的影响很大  数">
+<meta name="twitter:description" content="+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除">
 
 
 
@@ -432,6 +432,7 @@
         <blockquote>
 <p>+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除</p>
 </blockquote>
+<a id="more"></a>
 <h3 id="为什么需要复杂度分析">为什么需要复杂度分析？</h3>
 <p>很多人对复杂度分析有疑问, 认为直接在机器上跑一遍, 就可以得出时间和空间复杂度. 对于这种说法, 我们认为是正确的, 并且很多书籍将其称为<strong>事后统计</strong>. 但是, 这种方法有很大的局限性.</p>
 <ul>
@@ -474,34 +475,63 @@ T(n) = O(f(n))
 <p>当<span class="math inline">\(n\)</span>很大的时候, 我们只需记录一个最大量级就可以了, 例如<span class="math inline">\(T(n) = O(n)\)</span>; <span class="math inline">\(T(n) = O(n^2)\)</span>.</p>
 <h3 id="时间复杂度分析">时间复杂度分析</h3>
 <ul>
-<li>只关注循环次数最多的一段代码</li>
+<li><p>只关注循环次数最多的一段代码</p>
+<pre><code>int cal(int n) {
+    int sum = 0;
+    int i = 1;
+    for(; i &lt;= n; ++i){
+        sum = sum + i;
+    }
+    return sum;
+}</code></pre></li>
 </ul>
-<!--￼0-->
 <p>总的时间复杂度为<span class="math inline">\(O(n)\)</span></p>
 <ul>
 <li><p>加法法则: 总复杂度等于量级最大的那段代码的复杂度</p>
-<p>int cal(int n){ int sum_1 = 0; int p = 1; for(; p &lt; 100; ++p){ sum_1 = sum_1 + p; }</p>
-<pre><code>int sum_2 = 0;
-int q = 1;
-for(; q&lt;n; ++q){
-    sum_2 = sum_2 + q;
-}
-
-int sum_3 = 0;
-int i = 1;
-int j = 1;
-for(; i&lt;=n; ++i){
-    for(; j&lt;=n; ++j){
-        sum_3 = sum_3 + i * j;
+<pre><code>int cal(int n){
+    int sum_1 = 0;
+    int p = 1;
+    for(; p &lt; 100; ++p){
+        sum_1 = sum_1 + p;
     }
-}</code></pre>
-<p>return sum_1 + sum_2 + sum_3; }</p></li>
+
+    int sum_2 = 0;
+    int q = 1;
+    for(; q&lt;n; ++q){
+        sum_2 = sum_2 + q;
+    }
+
+    int sum_3 = 0;
+    int i = 1;
+    int j = 1;
+    for(; i&lt;=n; ++i){
+        for(; j&lt;=n; ++j){
+            sum_3 = sum_3 + i * j;
+        }
+    }
+
+return sum_1 + sum_2 + sum_3;
+}</code></pre></li>
 </ul>
 <p>总的时间复杂度为<span class="math inline">\(O(n^2)\)</span></p>
 <ul>
 <li><p>乘法法则: 嵌套代码的复杂度等于嵌套内外代码复杂度的乘积</p>
-<p>int cal(int n){ int ret = 0; int i = 1; for(; i&lt;n; ++i){ ret = ret + f(i); } }</p>
-<p>int f(int n){ int sum = 0; int i = 1; for(; i&lt;n; ++i){ sum = sum + i; } return sum; }</p></li>
+<pre><code>int cal(int n){
+    int ret = 0;
+    int i = 1;
+    for(; i&lt;n; ++i){
+        ret = ret + f(i);
+    }
+}
+
+int f(int n){
+    int sum = 0;
+    int i = 1;
+    for(; i&lt;n; ++i){
+        sum = sum + i;
+    }
+    return sum;
+}</code></pre></li>
 </ul>
 <p>总的时间复杂度为<span class="math inline">\(O(n^2)\)</span></p>
 <h3 id="几种常见时间复杂度实例分析">几种常见时间复杂度实例分析</h3>
