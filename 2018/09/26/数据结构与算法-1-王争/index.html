@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="scc技术博客">
 <meta property="og:description" content="+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-27T02:43:38.077Z">
+<meta property="og:updated_time" content="2018-09-27T03:29:26.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="复杂度分析（上）">
 <meta name="twitter:description" content="+文本内容是对王争《数据结构与算法之美》课程的笔记， 如果有任何侵权行为， 请联系博主删除">
@@ -549,7 +549,62 @@ int f(int n){
 <p>我们把时间复杂度为非多项式量级的算法问题叫做<strong>NP问题</strong>(Non-Deterministic Polynomial, 非确定多项式).</p>
 <p>当数据规模<span class="math inline">\(n\)</span>越来越大时, 非多项式量级算法的执行时间会急剧增加.</p>
 <p>因此, NP问题不是我们讨论的重点. 接下来, 我们主要来看几种常见的<strong>多项式时间复杂度</strong>.</p>
-<p><em>未完待续</em></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(O(1)\)</span></li>
+</ol>
+<p><span class="math inline">\(O(1)\)</span>只是常量级时间复杂度的一种表示方法, 并不是指只执行了一行代码.</p>
+<pre><code>int i = 8;
+int j = 6;
+int sum = i + j;</code></pre>
+<p>只要代码的执行时间不随<span class="math inline">\(n\)</span>的增长而增长, 这样代码的时间复杂度都记作<span class="math inline">\(O(1)\)</span>. <strong>一般情况下, 只要算法中不存在循环语句、递归语句, 即使有成千上万行代码, 其时间复杂度也是<span class="math inline">\(O(1)\)</span></strong>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p><span class="math inline">\(O(logn)\)</span>、<span class="math inline">\(O(nlogn)\)</span></p>
+<pre><code>i = 1;
+while(i&lt;=n){
+    i = i * 2;
+}</code></pre></li>
+</ol>
+<p>从代码中可以看出, 变量<span class="math inline">\(i\)</span>的值为: <span class="math display">\[
+   2^0\ \ 2^1\ \ 2^2\  \cdots \ 2^k\  \cdots \ 2^x = n
+   \]</span> 通过求解<span class="math inline">\(2^x = n\)</span>, 就可以知道代码的执行次数. 所以其为<span class="math inline">\(O(\log_2n)\)</span>.</p>
+<p>因为<span class="math inline">\(\log_3n\)</span>就等于<span class="math inline">\(\log_32 * \log_2n\)</span>, 所以<span class="math inline">\(O(\log_3n) = O(C * \log_2n)\)</span>, 其中<span class="math inline">\(C = \log_32\)</span>是一个常量. 因此, 在对数时间复杂度的表示方法里, 忽略对数的&quot;底&quot;, 统一表示为<span class="math inline">\(O(\log n)\)</span>.</p>
+<p>如果一段代码的时间复杂度是<span class="math inline">\(O(\log n)\)</span>, 循环<span class="math inline">\(n\)</span>遍, 时间复杂度就是<span class="math inline">\(O(n\log n)\)</span>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p><span class="math inline">\(O(m+n)\)</span>、<span class="math inline">\(O(m*n)\)</span></p>
+<pre><code>int call(int m, int n){
+    int sum_1 = 0;
+    int i = 1;
+    for(; i&lt;m; ++i){
+        sum_1 = sum_1 + 1;
+    }
+
+    int sum_2 = 0;
+    int j = 1;
+    for(; j&lt;n; ++j){
+        sum_2 = sum_2 + j;
+    }
+    return sum_1 + sum_2;
+}</code></pre></li>
+</ol>
+<p>从代码中可以看出, <span class="math inline">\(m\)</span>和<span class="math inline">\(n\)</span>是表示两个数据规模, 我们无法评判谁的数量级大, 所以, 时间复杂度就为<span class="math inline">\(O(m+n)\)</span>.</p>
+<p>乘法类似.</p>
+<h3 id="空间复杂度">空间复杂度</h3>
+<p>空间复杂度全程就是<strong>渐进空间复杂度</strong>, <strong>表示算法的存储空间与数据规模之间的增长关系</strong>.</p>
+<pre><code>void print(int n){
+    int i = 0;
+    int[] a = new int[n];
+    for(i; i&lt;n; ++i){
+        a[i] = i*i;
+    }
+
+    for(i=n-1; i&gt;=0; --i){
+        print out a[i];
+    }
+}</code></pre>
+<p>第<span class="math inline">\(2\)</span>行代码中, 我们申请了一个空间存储变量<span class="math inline">\(i\)</span>, 但是它是常量阶, 跟数据规模<span class="math inline">\(n\)</span>没有关系, 所以忽略. 第<span class="math inline">\(3\)</span>行申请了一个大小为<span class="math inline">\(n\)</span>的<span class="math inline">\(int\)</span>类型数组, 除此之外, 剩下的代码都没有占用更多的空间, 所以整段代码的空间<span class="math inline">\(O(n)\)</span>.</p>
+<p>常见的空间复杂度就是<span class="math inline">\(O(1)\)</span>、<span class="math inline">\(O(n)\)</span>、<span class="math inline">\(O(n^2)\)</span>.</p>
+<h3 id="学习关键">学习关键</h3>
+<p><strong>多练</strong></p>
 
       
     </div>
@@ -753,7 +808,7 @@ int f(int n){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要复杂度分析"><span class="nav-text">为什么需要复杂度分析？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大o复杂度表示法"><span class="nav-text">大\(O\)复杂度表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度分析"><span class="nav-text">时间复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种常见时间复杂度实例分析"><span class="nav-text">几种常见时间复杂度实例分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要复杂度分析"><span class="nav-text">为什么需要复杂度分析？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大o复杂度表示法"><span class="nav-text">大\(O\)复杂度表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度分析"><span class="nav-text">时间复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几种常见时间复杂度实例分析"><span class="nav-text">几种常见时间复杂度实例分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间复杂度"><span class="nav-text">空间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习关键"><span class="nav-text">学习关键</span></a></li></ol></div>
             
 
           </div>
