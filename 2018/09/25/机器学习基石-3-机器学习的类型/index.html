@@ -135,7 +135,7 @@
 <meta property="og:site_name" content="scc技术博客">
 <meta property="og:description" content="根据输出空间\(\mathcal{Y}\)分类">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-29T08:48:40.861Z">
+<meta property="og:updated_time" content="2018-10-01T16:07:49.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石 3.机器学习的类型">
 <meta name="twitter:description" content="根据输出空间\(\mathcal{Y}\)分类">
@@ -440,7 +440,7 @@
 <li>广告是否会赚钱</li>
 </ul>
 <p>等等。</p>
-<p>二元分类问题是机器学习中最基本也是最核心的问题, 很多理论推到和算法模型设计都是从这一类问题出发.</p>
+<p>二元分类问题是机器学习中最基本也是最核心的问题, 很多理论推导和算法模型设计都是从这一类问题出发.</p>
 <h4 id="多分类问题">多分类问题</h4>
 <p>二元分类问题很容易进行扩展, 即如果答案有多个离散的可能性, 那么问题演变为<strong>多元分类问题</strong>. 假设目标类别有<span class="math inline">\(K\)</span>种, 那么<span class="math inline">\(\mathcal{Y}=\{1, 2, \cdots, K\}\)</span>. 一个典型的例子是对硬币进行分类, 看投入的是<span class="math inline">\(1\)</span>角、<span class="math inline">\(5\)</span>角还是<span class="math inline">\(1\)</span>元. 这种问题类似于“选择题”. 这种问题类型的例子包括</p>
 <ul>
@@ -466,6 +466,44 @@
 <li>给定蛋白质数据, 判断蛋白质的结构</li>
 <li>给定语言文本, 给出语法树</li>
 </ul>
+<h3 id="根据数据标签y_n分类">根据数据标签<span class="math inline">\(y_n\)</span>分类</h3>
+<h4 id="有监督学习">有监督学习</h4>
+<p>考虑第一节中的硬币分类问题. 我们可以将所有硬币的特征收集起来, 设成<span class="math inline">\({\bf x}_n\)</span>, 同时可以将硬币的面额给出, 称为<span class="math inline">\(y_n\)</span>. 这两部分可以一起给到机器学习的算法<span class="math inline">\(\mathcal A\)</span>里, 得到<span class="math inline">\(g\)</span>. 这种每个特征组<span class="math inline">\({\bf x}_n\)</span>都有对应的<span class="math inline">\(y_n\)</span>的学习问题称作<strong>有监督学习</strong>. 这里&quot;监督&quot;的意义在于, 对每个特征都可以给出对应的标签, 是一种&quot;完整&quot;的教学.</p>
+<h3 id="无监督学习">无监督学习</h3>
+<p>如果对所有数据, 都没有标签给出, 机器也可以通过类似&quot;自学&quot;或者&quot;自己研究&quot;的方式将其归类. 这种学习问题称作&quot;无监督学习&quot;. 注意这种自动分类(称为聚类)的方法并不一定能得到正确的类数, 而且如何判读聚类结果的好坏也是一个难题. 这种问题类型的例子包括</p>
+<ul>
+<li>将文章按照主题归类</li>
+<li>将用户聚合称为用户群</li>
+</ul>
+<p>当然, 无监督学习不止聚类这一种方向, 还包括了</p>
+<ul>
+<li>密度估计, 即给定<span class="math inline">\(X = \{ {\bf x}_1, \ldots, {\bf x}_n \}\)</span>, 判断哪里稠密哪里稀疏. 例如给定一些带有地点的交通事故资料, 判断哪里是事故多发区(有点像回归分析)</li>
+<li>奇异点检测, 即给定<span class="math inline">\(X = \{ {\bf x}_1, \ldots, {\bf x}_n \}\)</span>, 判断哪些是异常点. 例如给定网络日志, 判断哪些是爬取日志(有点像极端情况下的二元分类)</li>
+</ul>
+<p>无监督学习的目标比较分散, 难以衡量算法的好坏</p>
+<h3 id="半监督学习">半监督学习</h3>
+<p>介于有监督学习和无监督学习之间, 只有少量数据有标签, 大部分标签都没有, 使用算法判断数据的类别. 这类问题的特点是标记数据很贵(标签获取不容易).</p>
+<h3 id="强化学习">强化学习</h3>
+<p>类似于训练宠物的方法: 当人们训练宠物时, 无法直接告诉它给定讯号<span class="math inline">\({\bf x}_n\)</span>以后期望的<span class="math inline">\(y_n\)</span>, 但是可以在它做了错误的回应以后施加惩罚, 通过这种方式告诉它这种做法是错的(当然也可以在它做了的正确的或者你不排斥的回应以后施加奖励). 即此时系统的输入包括了数据<span class="math inline">\(X\)</span>, 系统的行为<span class="math inline">\(\tilde{y}\)</span>和奖惩函数<span class="math inline">\(\rm goodness\)</span>. 这种问题类型的例子包括</p>
+<ul>
+<li>广告系统: <span class="math inline">\(X\)</span>为用户特征, <span class="math inline">\(\tilde{y}\)</span>为给出的广告, <span class="math inline">\(\rm goodness\)</span>是该广告的收入. 这样系统可以学到对给定用户应该给出什么广告</li>
+<li>德州扑克: <span class="math inline">\(X\)</span>为牌型和底池, <span class="math inline">\(\tilde{y}\)</span>为叫牌策略, <span class="math inline">\(\rm goodness\)</span>是牌局结束后的收益. 这样系统可以学到对给定局面的叫牌策略</li>
+</ul>
+<p>强化学习实际上是从一些隐含的数据中学习, 这些数据通常是顺序的</p>
+<h3 id="根据学习方式f-rightarrow-bf-x_n-y_n">根据学习方式<span class="math inline">\(f \Rightarrow ({\bf x}_n, y_n)\)</span></h3>
+<h4 id="批处理学习">批处理学习</h4>
+<p>读进所有的数据, 训练出来模型<span class="math inline">\(g\)</span>, 使用<span class="math inline">\(g\)</span>来处理未知数据. 批处理学习是最常见的一种学习方法</p>
+<h4 id="在线学习">在线学习</h4>
+<p>每看到一个样本就做出预测, 然后根据正确的标签对模型做出更新, 让模型的效果越来越好. 在线学习是一种循序渐进的学习方式. <span class="math inline">\(PLA\)</span>就很容易被改写为在线学习方法, 因为它看到一个错分样本就会更新权重. 另外, 强化学习通常都是在线学习, 因为每次我们只能得到部分数据.</p>
+<h4 id="主动学习">主动学习</h4>
+<p>批处理学习有点像填鸭式教育, 在线学习有点像老师课堂讲授, 但是这两种方式其实都是机器被动学习. 近几年一种新提出的研究方式类似于让机器来主动提问, 即对输入<span class="math inline">\({\bf x}_n\)</span>来提问对应的<span class="math inline">\(y_n\)</span>. 由于机器提问可以有技巧, 因此我们希望这种学习可以加速学习过程, 同时减少对标签的需求. 当标注样本比较昂贵的情况下, 主动学习比较有用</p>
+<h3 id="根据输入空间mathcalx分类">根据输入空间<span class="math inline">\(\mathcal{X}\)</span>分类</h3>
+<h4 id="具体特征">具体特征</h4>
+<p>这种情况下, 输入<span class="math inline">\(\mathcal{X} \subseteq \mathbb{R}^d\)</span>中的每个分量(称为<strong>特征</strong>)都有具体且复杂的物理意义. 这些特征都包含了人类的智慧, 称为&quot;领域知识&quot;, 是机器学习能处理的最简单的输入</p>
+<h4 id="原始特征">原始特征</h4>
+<p>假设要处理的是手写数字识别问题, 我们可以对输入做一些分析, 提取出具体特征, 包括数字是否对称, 笔画是否有弯折等等. 但是, 也可以直接将原始的每个像素的灰度值组合成一个256维向量(假设图片是<span class="math inline">\(16 \times 16\)</span>的). 这个输入比具体特征要抽象一些, 求解也更困难, 不过这些数据里仍然包含了一些简单的物理意义. 原始特征通常需要机器或者人来转换为具体特征, 这个转换的过程称为特征工程</p>
+<h4 id="抽象特征">抽象特征</h4>
+<p>以之前提到的预测用户对电影评分的比赛为例, 对于这个问题, 输入<span class="math inline">\(\mathcal{X} \subseteq \mathbb{N} \times \mathbb{N}\)</span>实际上是用户编号和电影编号组成的二元组, 而这些编号对机器来讲没有任何物理意义, 因此更加需要特征转换</p>
 
       
     </div>
@@ -673,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据输出空间mathcaly分类"><span class="nav-text">根据输出空间\(\mathcal{Y}\)分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类问题"><span class="nav-text">二分类问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多分类问题"><span class="nav-text">多分类问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回归问题"><span class="nav-text">回归问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构化分析"><span class="nav-text">结构化分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据输出空间mathcaly分类"><span class="nav-text">根据输出空间\(\mathcal{Y}\)分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分类问题"><span class="nav-text">二分类问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多分类问题"><span class="nav-text">多分类问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回归问题"><span class="nav-text">回归问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结构化分析"><span class="nav-text">结构化分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据数据标签y_n分类"><span class="nav-text">根据数据标签\(y_n\)分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#有监督学习"><span class="nav-text">有监督学习</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无监督学习"><span class="nav-text">无监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#半监督学习"><span class="nav-text">半监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强化学习"><span class="nav-text">强化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据学习方式f-rightarrow-bf-x_n-y_n"><span class="nav-text">根据学习方式\(f \Rightarrow ({\bf x}_n, y_n)\)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#批处理学习"><span class="nav-text">批处理学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在线学习"><span class="nav-text">在线学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主动学习"><span class="nav-text">主动学习</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据输入空间mathcalx分类"><span class="nav-text">根据输入空间\(\mathcal{X}\)分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具体特征"><span class="nav-text">具体特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原始特征"><span class="nav-text">原始特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象特征"><span class="nav-text">抽象特征</span></a></li></ol></li></ol></div>
             
 
           </div>
