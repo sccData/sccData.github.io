@@ -137,7 +137,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/10/02/机器学习基石-4-机器学习的可行性/1.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/02/机器学习基石-4-机器学习的可行性/2.png">
-<meta property="og:updated_time" content="2018-10-03T08:06:07.458Z">
+<meta property="og:updated_time" content="2018-10-03T08:08:47.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石 4.机器学习的可行性">
 <meta name="twitter:description" content="不可能学习的情况">
@@ -476,15 +476,15 @@ P[|E_{\rm in}(h) - E_{\rm out}(h)| &gt; \epsilon] \le 2\exp (-2\epsilon^2 N)
 <p>真正学习过程中, 我们不会只有一个<span class="math inline">\(h\)</span>来验证, 而是要在<span class="math inline">\(\mathcal{H} = \{h_1, \ldots, h_M\}\)</span>中做出选择. 假设找到了一个<span class="math inline">\(h_i\)</span>在训练集上表现完全正确, 是否应该把它选择为<span class="math inline">\(g\)</span>?</p>
 <p>先不考虑这个问题. 假设有<span class="math inline">\(150\)</span>个人, 每个人掷同一枚硬币<span class="math inline">\(5\)</span>次, 如果有一个人能连续扔出<span class="math inline">\(5\)</span>个正面, 那么这是否意味着这枚硬币不是均匀的? 答案是不可能. 因为假设硬币均匀, 由<span class="math inline">\(150\)</span>人每人掷<span class="math inline">\(5\)</span>次, 至少有一个人扔出连续<span class="math inline">\(5\)</span>个正面的概率是<span class="math inline">\(1-(\frac{31}{32})^{150} &gt; 99\)</span>. 那么返回刚才的例子, 这意味着<span class="math inline">\(h_i\)</span>即便在训练集上全对, 也不确定它就比其它的<span class="math inline">\(h&#39;\)</span>好(可能大家都是瞎猜). 假设将造成<span class="math inline">\(E_{in}\)</span>和<span class="math inline">\(E_{out}\)</span>相差比较大的取样称为&quot;不好的采样&quot;, 可以看到当存在选择的时候, 选择会恶化不好的采样(即让你选到错误<span class="math inline">\(h\)</span>的概率变得很大).</p>
 <p>同样的道理, 也可以把<span class="math inline">\(E_{in}(h)\)</span>和<span class="math inline">\(E_{out}(h)\)</span>差得特别大的数据称为&quot;不好的数据&quot;. 注意<span class="math inline">\(Hoeffding\)</span>不等式只能保证<span class="math inline">\(h\)</span>遇到&quot;不好的数据&quot;的概率不是很大. 事实上, 每个<span class="math inline">\(h_i\)</span>都会对应的一些数据<span class="math inline">\(\mathcal{D}&#39;\)</span>成为&quot;不好的数据&quot;, 例如下表</p>
-<table>
+<table style="width:100%;">
 <colgroup>
-<col width="7%">
-<col width="16%">
-<col width="16%">
-<col width="9%">
-<col width="21%">
-<col width="9%">
-<col width="21%">
+<col width="8%">
+<col width="15%">
+<col width="15%">
+<col width="8%">
+<col width="20%">
+<col width="8%">
+<col width="20%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -499,7 +499,7 @@ P[|E_{\rm in}(h) - E_{\rm out}(h)| &gt; \epsilon] \le 2\exp (-2\epsilon^2 N)
 </thead>
 <tbody>
 <tr class="odd">
-<td>h_1</td>
+<td><span class="math inline">\(h_1\)</span></td>
 <td>BAD</td>
 <td></td>
 <td></td>
@@ -508,7 +508,7 @@ P[|E_{\rm in}(h) - E_{\rm out}(h)| &gt; \epsilon] \le 2\exp (-2\epsilon^2 N)
 <td>BAD</td>
 </tr>
 <tr class="even">
-<td>h_2</td>
+<td><span class="math inline">\(h_2\)</span></td>
 <td></td>
 <td>BAD</td>
 <td></td>
@@ -517,7 +517,7 @@ P[|E_{\rm in}(h) - E_{\rm out}(h)| &gt; \epsilon] \le 2\exp (-2\epsilon^2 N)
 <td></td>
 </tr>
 <tr class="odd">
-<td>h_3</td>
+<td><span class="math inline">\(h_3\)</span></td>
 <td>BAD</td>
 <td>BAD</td>
 <td></td>
@@ -526,7 +526,7 @@ P[|E_{\rm in}(h) - E_{\rm out}(h)| &gt; \epsilon] \le 2\exp (-2\epsilon^2 N)
 <td>BAD</td>
 </tr>
 <tr class="even">
-<td></td>
+<td><span class="math inline">\(\ldots\)</span></td>
 <td></td>
 <td></td>
 <td></td>
@@ -535,7 +535,7 @@ P[|E_{\rm in}(h) - E_{\rm out}(h)| &gt; \epsilon] \le 2\exp (-2\epsilon^2 N)
 <td></td>
 </tr>
 <tr class="odd">
-<td>h_M</td>
+<td><span class="math inline">\(h_M\)</span></td>
 <td>BAD</td>
 <td></td>
 <td></td>
