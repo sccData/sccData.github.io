@@ -137,7 +137,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/10/02/机器学习基石-4-机器学习的可行性/1.png">
 <meta property="og:image" content="http://yoursite.com/2018/10/02/机器学习基石-4-机器学习的可行性/2.png">
-<meta property="og:updated_time" content="2018-10-03T04:38:14.573Z">
+<meta property="og:updated_time" content="2018-10-03T05:00:00.270Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石 4.机器学习的可行性">
 <meta name="twitter:description" content="不可能学习的情况">
@@ -537,7 +537,7 @@ P[|E_{\rm in}(h) - E_{\rm out}(h)| &gt; \epsilon] \le 2\exp (-2\epsilon^2 N)
 </tbody>
 </table>
 <p>从上表可以看到, 给出的这四条数据里, 只有第1126条是&quot;好的&quot;数据, 其余的都会给不同的<span class="math inline">\(h\)</span>带来麻烦. 接下来的问题是, 如果对某条数据<span class="math inline">\(\mathcal{D}_i\)</span>, 只要存在<span class="math inline">\(h_i \in \mathcal{H}\)</span>使得<span class="math inline">\(\mathcal{D}_i\)</span>是<span class="math inline">\(h_i\)</span>&quot;不好的数据&quot;, 那就称该数据为&quot;不好的数据&quot;, 那么对所有<span class="math inline">\(\mathcal{D}\)</span>, 如果算法<span class="math inline">\(\mathcal{A}\)</span>能够自由选择数据, 则算法遇上&quot;不好的数据&quot;的概率有没有上界</p>
-<p>答案是有的. 假设<span class="math inline">\(|\mathcal{H| = M\)</span>, 可以做出如下推到 <span class="math display">\[
+<p>答案是有的. 假设<span class="math inline">\(\mid \mathcal{H} \mid = M\)</span>, 可以做出如下推到 <span class="math display">\[
 \begin{align*}
 &amp;P_{\mathcal{D}}[{\rm BAD\ }\mathcal{D}] \\
 = &amp;P_{\mathcal{D}}[{\rm BAD\ }\mathcal{D} {\rm\ for\ }h_1 {\rm\ or\ }{\rm BAD\ }\mathcal{D} {\rm\ for\ }h_2 {\rm\ or\ }\ldots {\rm\ or\ }{\rm BAD\ }\mathcal{D} {\rm\ for\ }h_M] \\
@@ -548,6 +548,9 @@ P[|E_{\rm in}(h) - E_{\rm out}(h)| &gt; \epsilon] \le 2\exp (-2\epsilon^2 N)
 \]</span></p>
 <p>即在假设集为有限集, 数据量足够的情况下, 每个h都是安全的, 即无论如何选, 其返回的g都会有<span class="math inline">\(E_{in}(g) = E_{out}(g)是是PAC\)</span>的. 所以, 最理性的<span class="math inline">\(\mathcal{A}\)</span>会选择使<span class="math inline">\(E_{in}\)</span>最小的<span class="math inline">\(h\)</span>作为<span class="math inline">\(g\)</span>.</p>
 <p>但是当<span class="math inline">\(M\)</span>无限大时, 如何证明机器学习是可行的?</p>
+<blockquote>
+<p>+参考[http://txshi-mt.com/2017/08/06/NTUML-4-Feasibility-of-Learning/]</p>
+</blockquote>
 
       
     </div>

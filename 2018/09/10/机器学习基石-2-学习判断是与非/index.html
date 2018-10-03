@@ -139,7 +139,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/2.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/3.png">
 <meta property="og:image" content="http://yoursite.com/2018/09/10/机器学习基石-2-学习判断是与非/4.png">
-<meta property="og:updated_time" content="2018-09-29T08:48:28.745Z">
+<meta property="og:updated_time" content="2018-10-03T04:59:10.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习基石 2.学习判断是与非">
 <meta name="twitter:description" content="感知机假设集合">
@@ -507,10 +507,10 @@ y_{n(t)}{\bf w}_f^\mathsf{T}{\bf x}_{n(t)} \ge \min_n y_n {\bf w}_f^\mathsf{T}{\
 \begin{align*}
 {\bf w}_f^\mathsf{T}{\bf w}_{t+1} &amp;= {\bf w}_t^\mathsf{T}({\bf w}_t + y_{n(t)}{\bf x}_{n(t)}) \\
 &amp;\ge {\bf w}_f^\mathsf{T}{\bf w}_t + \min_n y_n {\bf w}_f^\mathsf{T}{\bf x}_n \\
-&amp;&gt; {\bf w}_f^\mathsf{T}{\bf w}_t + 0 = {\bf w}_f^\mathsf{T}{\bf w}_t\hspace{3ex} \blacksquare
+&amp;&gt; {\bf w}_f^\mathsf{T}{\bf w}_t  + 0 = {\bf w}_f^\mathsf{T}{\bf w}_t
 \end{align*}
 \]</span></p>
-<p>但是这里又有一个新的问题, 即內积变大不一定说明两个向量接近, 因为向量长度变大也会导致內积变大. 因此接下来我们要证明, 修正<span class="math inline">\({\bf w}_t\)</span>以后, 新的权重长度不会发生太大的变化. 这里要用到一个性质, 即<span class="math inline">\(PLA\)</span>仅在遇到错误的数据时才更新权重, 即如果权重<span class="math inline">\({\bf w}_t\)</span>被订正, 意味着<span class="math inline">\(sign({\bf w}_t^T{\bf w}_{n(t)}) \not = y_{n(t)}\)</span>, 也就是<span class="math inline">\(y_{n(t)}{\bf w}_t^T{\bf x}_{n(t)} \le 0\)</span>. 考虑到<span class="math inline">\(y_{n(t)}\)</span>是标量, 且取值只可能为<span class="math inline">\(1\)</span>或<span class="math inline">\(-1\)</span>(即<span class="math inline">\(y_{n(t)}^2 = 1\)</span>), <span class="math inline">\({\bf w}_t^T{\bf x}_{n(t)}\)</span>也是标量, 因此 <span class="math display">\[
+<p>但是这里又有一个新的问题, 即內积变大不一定说明两个向量接近, 因为向量长度变大也会导致內积变大. 因此接下来我们要证明, 修正<span class="math inline">\({\bf w}_t\)</span>以后新的权重长度不会发生太大的变化这里要用到一个性质即以后, 新的权重长度不会发生太大的变化. 这里要用到一个性质, 即<span class="math inline">\(PLA\)</span>仅在遇到错误的数据时才更新权重即如果权重仅在遇到错误的数据时才更新权重, 即如果权重<span class="math inline">\({\bf w}_t\)</span>被订正意味着被订正, 意味着<span class="math inline">\(sign({\bf w}_t^T{\bf w}_{n(t)}) \not = y_{n(t)}\)</span>也就是, 也就是<span class="math inline">\(y_{n(t)}{\bf w}_t^T{\bf x}_{n(t)} \le 0\)</span>考虑到. 考虑到<span class="math inline">\(y_{n(t)}\)</span>是标量且取值只可能为是标量, 且取值只可能为<span class="math inline">\(1\)</span>或<span class="math inline">\(-1\)</span>(即<span class="math inline">\(y_{n(t)}^2 = 1\)</span>), <span class="math inline">\({\bf w}_t^T{\bf x}_{n(t)}\)</span>也是标量, 因此 <span class="math display">\[
 \begin{align*}
 |\!|{\bf w}_{t+1}|\!|^2 &amp;= |\!|{\bf w}_t + y_{n(t)}{\bf x}_{n(t)}|\!|^2
 \end{align*}
@@ -518,8 +518,8 @@ y_{n(t)}{\bf w}_f^\mathsf{T}{\bf x}_{n(t)} \ge \min_n y_n {\bf w}_f^\mathsf{T}{\
 \begin{align*}
 |\!|{\bf w}_{t+1}|\!|^2 &amp;= ({\bf w}+y{\bf x})^\mathsf{T}({\bf w}+y{\bf x}) \\
 &amp;= {\bf w}^\mathsf{T}{\bf w} + 2y{\bf w}^\mathsf{T}{\bf x} + {\bf x}^\mathsf{T}{\bf x} \\
-&amp;\le |\!|{\bf w}|\!|^2 + |\!|{\bf x}|\!|^2 \hspace{3ex}(\because y{\bf w}^\mathsf{T}{\bf x} \le 0) \\
-&amp;\le |\!|{\bf w}|\!|^2 + \max_n|\!|{\bf x}_n|\!|^2
+&amp;\le |\!|{\bf w}|\!|^2 + |\!|{\bf x}|\!|^2 \ \ \ \ \ \ \ \ \ \ \ \ \ (y{\bf w}^\mathsf{T}{\bf x} \le 0) \\
+&amp;\le |\!|{\bf w}|\!|^2 + \max_n |\!|{\bf x}_n|\!|^2
 \end{align*}
 \]</span> 即权重经过修正以后, 其长度最多增加<span class="math inline">\(\max_n |\!|{\bf x}_n|\!|^2\)</span></p>
 <p>经由上面两部分, 假设权重的初始向量为<span class="math inline">\(\bf 0\)</span>, 我们可以求出经过<span class="math inline">\(T\)</span>步更新最后得到的权重<span class="math inline">\({\bf w}_{T}\)</span>与<span class="math inline">\(\bf w_{f}\)</span>之间的夹角余弦值的下界. 为了求这个值, 只需要求两个权重归一化以后內积的下界即可, 即 <span class="math display">\[
@@ -561,7 +561,7 @@ y_{n(t)}{\bf w}_f^\mathsf{T}{\bf x}_{n(t)} \ge \min_n y_n {\bf w}_f^\mathsf{T}{\
 <p>直到足够多次迭代完成. 我们将<span class="math inline">\(\hat{\bf w}\)</span>(称为<span class="math inline">\({\bf w}_{pocket}\)</span>)返回为<span class="math inline">\(g\)</span></p>
 <p>注意在线性可分集合上也可以使用口袋法, 算法也可以返回一个无训练误差的解. 但是由于每次更新权重以后, 都要在所有数据上使用新旧权重各跑一遍, 来计算错分数量, 因此口袋法的执行时间通常比原始<span class="math inline">\(PLA\)</span>的计算时间长很多.</p>
 <blockquote>
-<p>+参考 <a href="http://txshi-mt.com/2017/08/01/NTUML-1-the-Learning-Problem/txshi-mt.com/2017/08/01/NTUML-1-the-Learning-Problem/" target="_blank" rel="noopener">txshi-mt.com/2017/08/01/NTUML-1-the-Learning-Problem/</a></p>
+<p>+参考[http://txshi-mt.com/2017/08/03/NTUML-2-Learning-to-Answer-Yes-No/]</p>
 </blockquote>
 
       
